@@ -27,7 +27,7 @@ const gallery = [
 
 function getImage(url){
     return new Promise(function(resolve, reject){
-        var img = new Image();
+        let img = new Image();
         img.onload = function(){
             resolve(url)
         };
@@ -38,11 +38,8 @@ function getImage(url){
     })
 }
 
-var images = gallery.map(getImage);
 
-
-
-var Landing = React.createClass({
+const Landing = React.createClass({
     getInitialState(){
       return {
           galleryFetched:false,

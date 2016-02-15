@@ -1,14 +1,11 @@
 import React from 'react';
-import h from '../lib/helpers';
+import {getFormattedTime,getResizedLogo} from '../lib/helpers';
 import Amenities from './Amenities';
 
-var Ticket = React.createClass({
-    render() {
-        const ticket = this.props.ticket;
-        const origin = this.props.locations.origin;
-        const destination = this.props.locations.destination;
-        const operator = this.props.operator;
-        const lang = this.props.lang;
+const Ticket = React.createClass({
+  render() {
+        const {departure,store} = this.props;
+        const language = store.getState().language;
 
         return (
             <li className="ticket_item">
@@ -16,28 +13,28 @@ var Ticket = React.createClass({
                     <div className="columns small-12 medium-8 ticket_item_route">
                         <div className="row align-middle align-spaced">
                             <div className="columns small-5">
-                                <p className="ticket_item_cityname">{origin.city.name}</p>
-                                <p className="ticket_item_time"><b>{h.getFormattedTime(ticket.departure_time,lang)}</b></p>
-                                <p>{origin.name}</p>
+                                <p className="ticket_item_cityname">{departure.origin_location_obj.city.name}</p>
+                                <p className="ticket_item_time"><b>{getFormattedTime(departure.departure_time,language)}</b></p>
+                                <p>{departure.origin_location_obj.name}</p>
                             </div>
                             <div className="columns small-1 ticket_item_arrow"><i className="material-icons">arrow_forward</i></div>
                             <div className="columns small-5">
-                                <p className="ticket_item_cityname">{destination.city.name}</p>
-                                <p className="ticket_item_time"><b>{h.getFormattedTime(ticket.arrival_time,lang)}</b></p>
-                                <p>{destination.name}</p>
+                                <p className="ticket_item_cityname">{departure.destination_location_obj.city.name}</p>
+                                <p className="ticket_item_time"><b>{getFormattedTime(departure.arrival_time,language)}</b></p>
+                                <p>{departure.destination_location_obj.name}</p>
                             </div>
                         </div>
                     </div>
                     <div className="column small-12 medium-4 ticket_item_detail">
                         <div className="ticket_item_operator">
-                            <img className="ticket_item_operator_logo" src={h.getResizedLogo(operator.logo_url)} alt={operator.name}/>
+                            <img className="ticket_item_operator_logo" src={getResizedLogo(departure.operator_obj.logo_url)} alt={departure.operator_obj.name}/>
                         </div>
                         <div className="ticket_item_price">
-                            <b>&#36;{Math.round(parseFloat(ticket.prices.total)/100)} <span className="ticket_item_currency">CAD</span></b>
+                            <b>&#36;{Math.round(parseFloat(departure.prices.total)/100)} <span className="ticket_item_currency">CAD</span></b>
                         </div>
                         <div className="ticket_item_class">
-                            <div className="">{ticket.class_name}</div>
-                            <div className=""><Amenities amenities={ticket.amenities}/></div>
+                            <div className="">{departure.class_name}</div>
+                            <div className=""><Amenities amenities={departure.amenities}/></div>
                         </div>
                     </div>
                 </div>

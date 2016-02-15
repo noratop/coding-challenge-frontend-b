@@ -1,4 +1,6 @@
-export default {
+import {store} from '../components/reducer';
+
+const languagePack = {
     french:{
         sortBy:'Trier par',
         price:'Prix',
@@ -13,4 +15,17 @@ export default {
         selectTrip: "Select your trip",
         changeLangText:'Change language'
     }
+};
+
+//Get text in current language
+function getText(textKey){
+    const {language} = store.getState();
+    switch (language) {
+        case 'fr':
+            return languagePack.french[textKey];
+        default:
+            return languagePack.english[textKey];
+    }
 }
+
+export default getText; 

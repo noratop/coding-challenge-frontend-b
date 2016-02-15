@@ -9,7 +9,7 @@ import Landing from './components/Landing';
 import Home from './components/Home';
 import Departures from './components/Departures';
 
-var routes = (
+const routes = (
     <Router history={createHistory()}>
         <Route path="/" component={App}>
             <IndexRoute component={Landing}/>

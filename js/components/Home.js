@@ -1,7 +1,7 @@
 import React from 'react';
 import LanguageSelector from './LanguageSelector';
 
-var Home = React.createClass({
+const Home = React.createClass({
     componentDidMount(){
         const {store} = this.props;
         const lang = this.props.params.lang;
@@ -20,8 +20,8 @@ var Home = React.createClass({
             language: lang
         })
     },
-    getChildrenWithStore(){
-        var comp = this;
+    getChildrenWithStore(){//inject store in each Home child
+        const comp = this;
         return React.Children.map(this.props.children, function(child) {
             return React.cloneElement(child, { store: comp.props.store });
         });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Amenities = React.createClass({
+const Amenities = React.createClass({
     render() {
         let amenities = this.props.amenities;
         return (

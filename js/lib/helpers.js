@@ -1,5 +1,3 @@
-//Busbud helpers
-
 //merge fetch and poll results: res2 can only complete or update res1.
 //return a new result object
 function mergeResult(res1,res2){
@@ -35,41 +33,52 @@ function getFormattedTime(timeString,lang){
     return date.toLocaleTimeString(lang,options)
 }
 
-// Build a new location object with full origin and destination {location} objects + associated {city} object. Location is then passed to the Ticket component
-function getTicketLocations(result, ticket){
-    let locations = {
-        origin:{},
-        destination:{}
-    };
 
-    //find the locations object
-    result.locations.reduce(function(acc,el){
-        if (el.id === ticket.origin_location_id) {
-            acc.origin = el;
-        }
-        if (el.id === ticket.destination_location_id){
-            acc.destination = el;
-        }
-        return acc;
-    },locations);
+// Bind the full origin and destination {location} objects + associated {city} object to each departure.
+function bindLocations(result){
+    if(!result.locations) {return result;}
 
-    //add the city object
-    locations.origin.city = result.cities[0];
-    locations.destination.city = result.cities[1];
+    //parse locations array to objects
+    const locationsObj = result.locations.reduce(function(acc,el){
+        acc[el.id]=el;
+      return acc
+    },{});
 
-    if (locations.origin.city.id !== locations.origin.city_id) {
-        locations.origin.city = result.cities[1];
-        locations.destination.city = result.cities[0];
-    }
+    //bind the locations object to each departure
+    result.departures = result.departures.map(function(el){
+      //bind the origin/city
+      el.origin_location_obj = {
+        ...locationsObj[el.origin_location_id],
+        city: result.cities[0].id === locationsObj[el.origin_location_id].city_id? result.cities[0]: result.cities[1]
+      };
+      //bind the destination/city
+      el.destination_location_obj = {
+        ...locationsObj[el.destination_location_id],
+        city: result.cities[0].id === locationsObj[el.destination_location_id].city_id? result.cities[0]: result.cities[1]
+      }
 
-    return locations
+      return el;
+    })
+
+    return result;
 }
 
-//Retrieve the operator in order to pass it to the Ticket component
-function getTicketOperator(result, ticket){
-    return result.operators.find(function(el){
-        return el.id === ticket.operator_id
-    })
+
+//Bind the full operator object to each departure
+function bindOperators(result){
+    if(!result.operators) {return result;}
+
+    const operatorsObj = result.operators.reduce(function(acc,el){
+        acc[el.id]=el;
+      return acc
+    },{});
+
+    result.departures = result.departures.map(function(el){
+        el.operator_obj = operatorsObj[el.operator_id];
+        return el;
+    });
+
+    return result;
 }
 
 //Resize the operator logo
@@ -78,10 +87,11 @@ function getResizedLogo(url){
     //return url.replace(/{width}/g,width).replace(/{height}/g,height);
 }
 
+
 export default {
-    mergeResult: mergeResult,
-    getFormattedTime:getFormattedTime,
-    getTicketLocations:getTicketLocations,
-    getTicketOperator:getTicketOperator,
-    getResizedLogo:getResizedLogo
+    mergeResult,
+    getFormattedTime,
+    bindLocations,
+    bindOperators,
+    getResizedLogo,
 }

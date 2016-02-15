@@ -5,9 +5,10 @@ import IconButton from 'material-ui/lib/icon-button';
 import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import RaisedButton from 'material-ui/lib/raised-button';
+import getText from '../lib/language_pack';
 
 
-var LanguageSelector = React.createClass({
+const LanguageSelector = React.createClass({
     getInitialState(){
         return {
             open:false
@@ -24,14 +25,13 @@ var LanguageSelector = React.createClass({
         return `/${lang}/${subpath}`;
     },
     render() {
-        const store = this.props.store;
-        const lg = store.getState().language;
+        const {store} = this.props;
 
         return (
             <div className="lang-bar">
                 <IconButton
                     iconClassName="material-icons"
-                    tooltip={lg.changeLangText}
+                    tooltip={getText('changeLangText')}
                     tooltipPosition="right"
                     touch={true}
                     onTouchTap={this.handleToggle}

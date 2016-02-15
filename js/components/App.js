@@ -4,11 +4,11 @@ import {store} from './reducer';
 import injectTapEventPlugin from "react-tap-event-plugin";
 injectTapEventPlugin();
 
-var App = React.createClass({
-    getChildrenWithProps(){
-        var comp = this;
+const App = React.createClass({
+    getChildrenWithProps(){ //inject store in each App child
+        const comp = this;
         return React.Children.map(this.props.children, function(child) {
-            return React.cloneElement(child, { store: store });
+            return React.cloneElement(child, { store });
         });
     },
     render() {
