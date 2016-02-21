@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import LinearProgress from 'material-ui/lib/linear-progress';
+import getMomentDate from '../lib/moment';
 
 const gallery = [
     "http://igloofest.ca/public/app/uploads/images/569ddee1488dd.jpeg",
@@ -75,12 +76,14 @@ const Landing = React.createClass({
         }
     },
     render() {
+      const date = getMomentDate().format('YYYY-MM-DD');
+
         return (
             <div>
                 <div className="content-section">
                     <div className="content-section_ticket">
                         <img className="content-section_igloofestlogo" src="http://igloofest.ca/public/app/uploads/images/5661d13eecfee.png" alt="igloofest logo"/>
-                        <Link className="content-section_link" to="/en/departures/dr5reg/f25dvk/2016-02-05">GET YOUR BUS TICKET NOW!</Link>
+                        <Link className="content-section_link" to={`/en/departures/dr5reg/f25dvk/${date}`}>GET YOUR BUS TICKET NOW!</Link>
                     </div>
                     <div className="content-section_busbudlogo">
                         {this.renderProgress()}

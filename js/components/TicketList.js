@@ -21,7 +21,7 @@ const TicketList = React.createClass({
       const {store} = this.props;
       const {sortBy,tickets} = store.getState();
       const departures = tickets.result.departures || [];
-      console.log(departures);
+      // console.log(departures);
        switch (sortBy) {
            case 'SORT_BY_PRICE':
                return departures.sort(function(a,b){
@@ -42,7 +42,7 @@ const TicketList = React.createClass({
         const departures = tickets.result.departures || [];
 
         if (tickets.fetching) {
-            console.log('is fetching');
+            // console.log('is fetching');
             return (
                 <li className="ticket_item ticket_item_fetching">
                     <CircularProgress/>
@@ -50,7 +50,7 @@ const TicketList = React.createClass({
             )
         }
         else if (!departures.length) {
-            console.log('No results');
+            // console.log('No results');
             return (
                 <li className="ticket_item ticket_item_refresh">No results, please refresh</li>
             )

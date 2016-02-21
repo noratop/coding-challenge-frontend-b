@@ -6,14 +6,18 @@ const languagePack = {
         price:'Prix',
         departure_time:'Heure de départ',
         selectTrip:"Sélectionnez votre voyage",
-        changeLangText:'Changer la langue'
+        changeLangText:'Changer la langue',
+        to:'à',
+        oneWay:'Billet aller-simple'
     },
     english:{
         sortBy:'Sort By',
         price:'Price',
         departure_time:'Departure Time',
         selectTrip: "Select your trip",
-        changeLangText:'Change language'
+        changeLangText:'Change language',
+        to:'to',
+        oneWay:'One-way ticket'
     }
 };
 
@@ -28,4 +32,4 @@ function getText(textKey){
     }
 }
 
-export default getText; 
+export default getText;

@@ -5,7 +5,7 @@ const Home = React.createClass({
     componentDidMount(){
         const {store} = this.props;
         const lang = this.props.params.lang;
-
+        // console.log(lang);
         store.dispatch({
             type:'CHANGE_LANGUAGE',
             language: lang
