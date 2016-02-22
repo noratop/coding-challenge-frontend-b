@@ -16,23 +16,19 @@ This coding challenge makes a good candidate to learn Flux architecture, Redux s
 2. Design of the solution:
 * What are the reducer actions of my app?
 * How to generate new state asynchronously?
-* When the user changes the language of the app, how to notify the Departures component to fetch new data? 
+* When the user changes the language of the app, how to notify the Departures component to fetch new data?
 
-**Solution**: 
+**Solution**:
 - Use the router to handle language change, providing the language as props passed to the Departures component (child component).
 - Keep data in reducer. The Departures component will fetch data when mounted and will refetch when will receive new props.   
-- The state of the lives in a single unique store (redux). The store is initiated as a props in the App component and then passed to children as props. This solution is chosen to respect React principles specifying the data flow in the App. 
+- The state of the lives in a single unique store (redux). The store is initiated as a props in the App component and then passed to children as props. This solution is chosen to respect React principles specifying the data flow in the App.
 Other options to address this concern:
 * Import the store with require (or import)
 * Use React context to access the store. This would have been the easiest way. However, according to the React documentation, the context API is not stable and should be used *sparingly*.
+- redux-thunk to add middleware, in order to avoid dispatching inside of the reducer.
+- Moment.js to handle dates format.
 
 ## Left todo
-- use redux-thunk to add middleware, in order to avoid dispatching inside of the reducer.
-- refactoring: extract some components.
-- add documentation in code.
-- add Moment.js to handle dates format.
-- bugs: toLocaleTimeString is not supported by Safari. Need to code alternative.
-- Fetching departures occurs on componentDidMount for now, and has to be moved to a 'search' form that is not included yet.
 - add more sort and filter options like operators...
 - add switch like currency.
 
@@ -42,12 +38,12 @@ Other options to address this concern:
 # coding-challenge-frontend-b
 ![igloofest](https://cloud.githubusercontent.com/assets/1574577/11387762/0ba89cb6-92fc-11e5-9fb1-3d1e6747cc88.png)
 
-It's getting cold in Montreal and the [Igloofest](http://igloofest.ca/en/) is kicking in high gear! 
+It's getting cold in Montreal and the [Igloofest](http://igloofest.ca/en/) is kicking in high gear!
 Your challenge is to build a microsite that allows a traveler from NYC to find one-way departure schedules for the festival's closing weekend.
 
 ## Functional Requirements
 - Has a simple onboarding screen that will trigger the departure search
-- Lists all the departures for a given origin city (**New York - geohash: dr5reg**) and a given destination city (**Montreal - geohash: f25dvk**) for a given day (**the 5th of February 2016**) for **1** adult. 
+- Lists all the departures for a given origin city (**New York - geohash: dr5reg**) and a given destination city (**Montreal - geohash: f25dvk**) for a given day (**the 5th of February 2016**) for **1** adult.
 - For each departure, we want, at least, to see the **departure time**, the **arrival time**, the **location name** and the **price** (use `prices.total` of the `departure`).
 
 ## Non-functional requirements

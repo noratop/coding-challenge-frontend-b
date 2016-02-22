@@ -1,11 +1,20 @@
 import React from 'react';
 import {getFormattedTime,getResizedLogo} from '../lib/helpers';
 import Amenities from './Amenities';
+import moment from 'moment';
 
 const Ticket = React.createClass({
+  getFormattedTime(timeString){
+      const {store} = this.props;
+      const language = store.getState().language;
+
+      moment.locale(language);
+      const date = moment(timeString);
+
+      return date.format('LT');
+  },
   render() {
         const {departure,store} = this.props;
-        const language = store.getState().language;
 
         return (
             <li className="ticket_item">
@@ -14,13 +23,13 @@ const Ticket = React.createClass({
                         <div className="row align-middle align-spaced">
                             <div className="columns small-5">
                                 <p className="ticket_item_cityname">{departure.origin_location_obj.city.name}</p>
-                                <p className="ticket_item_time"><b>{getFormattedTime(departure.departure_time,language)}</b></p>
+                                <p className="ticket_item_time"><b>{this.getFormattedTime(departure.departure_time)}</b></p>
                                 <p>{departure.origin_location_obj.name}</p>
                             </div>
                             <div className="columns small-1 ticket_item_arrow"><i className="material-icons">arrow_forward</i></div>
                             <div className="columns small-5">
                                 <p className="ticket_item_cityname">{departure.destination_location_obj.city.name}</p>
-                                <p className="ticket_item_time"><b>{getFormattedTime(departure.arrival_time,language)}</b></p>
+                                <p className="ticket_item_time"><b>{this.getFormattedTime(departure.arrival_time)}</b></p>
                                 <p>{departure.destination_location_obj.name}</p>
                             </div>
                         </div>
