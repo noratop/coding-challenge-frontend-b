@@ -21,7 +21,8 @@ const SearchBar = React.createClass({
                     <p className="search-bar_date">{date}</p>
                     <p>{getText('oneWay')}</p>
                 </div>
-                <div className="columns">
+                <div className="columns logo">
+                    <div className="search-bar_igloo-logo"><a href="https://www.busbud.com/en" target="_blank"><img src="https://busbud-pubweb-assets.global.ssl.fastly.net/images/logos/fc7ed21.logo-post-60@2x.png" alt="busbud logo"/></a></div>
                 </div>
             </div>
         )
