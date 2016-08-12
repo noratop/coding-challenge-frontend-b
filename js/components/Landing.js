@@ -48,16 +48,16 @@ const Landing = React.createClass({
       }
     },
     componentDidMount(){
-        const images = gallery.map(getImage);
-        let component = this;
-        Promise.all(images).then(function(urls){
-            component.setState({
-               galleryFetched:true,
-               gallery:urls
-           });
-        }).catch(function(urls){
-            console.log("Error fetching some images: " + urls)
-        });
+        // const images = gallery.map(getImage);
+        // let component = this;
+        // Promise.all(images).then(function(urls){
+        //     component.setState({
+        //        galleryFetched:true,
+        //        gallery:urls
+        //    });
+        // }).catch(function(urls){
+        //     console.log("Error fetching some images: " + urls)
+        // });
     },
     renderGallery(){
         if (this.state.galleryFetched) {
@@ -90,11 +90,11 @@ const Landing = React.createClass({
                         <img src="https://busbud-pubweb-assets.global.ssl.fastly.net/images/logos/fc7ed21.logo-post-60@2x.png" alt="busbud logo"/>
                     </div>
                 </div>
-                <ul className="gallery">
-                    {
-                        this.renderGallery()
-                    }
-                </ul>
+                {/*<ul className="gallery">*/}
+                    {/*{*/}
+                        {/*this.renderGallery()*/}
+                    {/*}*/}
+                {/*</ul>*/}
             </div>
         )
     }
