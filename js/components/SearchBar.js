@@ -22,7 +22,6 @@ const SearchBar = React.createClass({
                     <p>{getText('oneWay')}</p>
                 </div>
                 <div className="columns">
-                    <div className="search-bar_igloo-logo"><a href="http://igloofest.ca/" target="'blank" alt="igloofest"><img src="http://igloofest.ca/public/app/uploads/images/5661d13eecfee.png" alt="igloofest logo"/></a></div>
                 </div>
             </div>
         )

@@ -12,7 +12,8 @@ import Departures from './components/Departures';
 const routes = (
     <Router history={createHistory()}>
         <Route path="/" component={App}>
-            <IndexRoute component={Landing}/>
+          <IndexRoute component={Landing}/>
+          <Route path="coding-challenge-frontend-b" component={Landing}/>
             <Route path=":lang" component={Home}>
                 <Route path="departures(/:origin/:dest/:date)" component={Departures}/>
             </Route>

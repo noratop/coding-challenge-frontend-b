@@ -82,7 +82,7 @@ const Landing = React.createClass({
             <div>
                 <div className="content-section">
                     <div className="content-section_ticket">
-                        <img className="content-section_igloofestlogo" src="http://igloofest.ca/public/app/uploads/images/5661d13eecfee.png" alt="igloofest logo"/>
+                        <img className="content-section_igloofestlogo"/>
                         <Link className="content-section_link" to={`/en/departures/dr5reg/f25dvk/${date}`}>GET YOUR BUS TICKET NOW!</Link>
                     </div>
                     <div className="content-section_busbudlogo">
