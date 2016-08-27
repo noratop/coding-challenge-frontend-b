@@ -1,6 +1,6 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { Router, Route, Redirect } from 'react-router';
+import { Router, Route, IndexRedirect } from 'react-router';
 import { createHistory } from 'history';
 import getMomentDate from './lib/moment';
 
@@ -15,8 +15,8 @@ const date = getMomentDate().format('YYYY-MM-DD');
 const routes = (
     <Router history={createHistory()}>
         <Route path="/" component={App}>
+            <IndexRedirect to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
             <Route path="coding-challenge-frontend-b" component={App}>
-            <Redirect from="/coding-challenge-frontend-b" to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
             <Route path=":lang" component={Home}>
                 <Route path="departures(/:origin/:dest/:date)" component={Departures}/>
             </Route>
