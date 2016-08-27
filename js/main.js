@@ -14,10 +14,12 @@ const date = getMomentDate().format('YYYY-MM-DD');
 
 const routes = (
     <Router history={createHistory()}>
-        <Route path="/coding-challenge-frontend-b/" component={App}>
+        <Route path="/" component={App}>
             <IndexRedirect to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
-            <Route path="coding-challenge-frontend-b/:lang" component={Home}>
+            <Route path="coding-challenge-frontend-b" component={App}>
+            <Route path=":lang" component={Home}>
                 <Route path="departures(/:origin/:dest/:date)" component={Departures}/>
+            </Route>
             </Route>
             <Route path="*" component={NotFound}/>
         </Route>
