@@ -3,6 +3,8 @@ import Paper from 'material-ui/lib/paper';
 import Ticket from './Ticket';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import {loadDepartures} from './actionCreators';
+import { Link } from 'react-router';
+
 
 const TicketList = React.createClass({
     componentDidMount(){
@@ -52,7 +54,9 @@ const TicketList = React.createClass({
         else if (!departures.length) {
             // console.log('No results');
             return (
-                <li className="ticket_item ticket_item_refresh">No results, please refresh</li>
+                <li className="ticket_item ticket_item_refresh">No results.
+                  <Link to="/">Click here to search again</Link>
+                </li>
             )
         }
     },
