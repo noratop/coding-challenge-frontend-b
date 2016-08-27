@@ -14,9 +14,9 @@ const date = getMomentDate().format('YYYY-MM-DD');
 
 const routes = (
     <Router history={createHistory()}>
-        <Route path="/" component={App}>
-            <IndexRedirect to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
+        <Route path="/">
             <Route path="coding-challenge-frontend-b" component={App}>
+            <IndexRedirect to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
             <Route path=":lang" component={Home}>
                 <Route path="departures(/:origin/:dest/:date)" component={Departures}/>
             </Route>
