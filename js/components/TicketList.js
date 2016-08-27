@@ -54,7 +54,8 @@ const TicketList = React.createClass({
         else if (!departures.length) {
             // console.log('No results');
             return (
-                <li className="ticket_item ticket_item_refresh">No results.
+                <li className="ticket_item ticket_item_refresh">
+                  No results. <br/>
                   <Link to="/">Click here to search again</Link>
                 </li>
             )
