@@ -16,10 +16,8 @@ const routes = (
     <Router history={createHistory()}>
         <Route path="/">
             <IndexRedirect to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
-            <Route path="coding-challenge-frontend-b" component={App}>
             <Route path=":lang" component={Home}>
                 <Route path="departures(/:origin/:dest/:date)" component={Departures}/>
-            </Route>
             </Route>
             <Route path="*" component={NotFound}/>
         </Route>
