@@ -3,7 +3,6 @@ import Paper from 'material-ui/lib/paper';
 import Ticket from './Ticket';
 import CircularProgress from 'material-ui/lib/circular-progress';
 import {loadDepartures} from './actionCreators';
-import { Link } from 'react-router';
 import getMomentDate from '../lib/moment';
 
 const TicketList = React.createClass({
@@ -38,9 +37,9 @@ const TicketList = React.createClass({
            default:
                return departures;
        }
-   },
+    },
     renderProgress(){
-        const {tickets} = this.props.store.getState();
+        const {tickets, count} = this.props.store.getState();
         const departures = tickets.result.departures || [];
 
         if (tickets.fetching) {
@@ -52,12 +51,10 @@ const TicketList = React.createClass({
             )
         }
         else if (!departures.length) {
-            const date = getMomentDate().format('YYYY-MM-DD');
             return (
-                <li className="ticket_item ticket_item_refresh">
-                  No results. <br/>
-                  <Link to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}>Click here to search again</Link>
-                </li>
+              <li className="ticket_item ticket_item_refresh">
+                No results. Try refreshing the page.
+              </li>
             )
         }
     },

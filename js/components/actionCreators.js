@@ -1,5 +1,5 @@
 import request from 'superagent';
-import {mergeResult,bindLocations,bindOperators} from '../lib/helpers';
+import { mergeResult, bindLocations, bindOperators } from '../lib/helpers';
 
 function fetch(params,query,poll=false) {
     return request
@@ -28,7 +28,7 @@ function getQuery(props){
   };
 }
 
-function loadDepartures(props) {
+function loadDepartures(props, count=0) {
   const params = getParams(props);
   const query = getQuery(props);
 
@@ -51,13 +51,15 @@ function loadDepartures(props) {
           let result = bindLocations(bindOperators(res.body));
           //let result = {...res.body,complete:false}; // testing poll
 
-          dispatch({
+          if (!result.departures.length && !count) {
+            console.log('retried fetching data once');
+            loadDepartures(props, 1);
+          }
+          else {
+            dispatch({
               type:'RECEIVED_DEPARTURES',
               result
-          });
-
-          if (!result.is_valid_route){
-              //dispatch invalid_route
+            });
           }
 
           if (!result.complete) {

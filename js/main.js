@@ -1,29 +1,33 @@
 import React  from 'react';
 import ReactDOM  from 'react-dom';
-import { Router, Route, IndexRedirect } from 'react-router';
-import { createHistory } from 'history';
+import { Router, Route, Redirect, hashHistory } from 'react-router';
+// import { createHistory } from 'history';
 import getMomentDate from './lib/moment';
 
 import App from './components/App';
 import NotFound from './components/NotFound';
-import Landing from './components/Landing';
 import Home from './components/Home';
 import Departures from './components/Departures';
 
 const date = getMomentDate().format('YYYY-MM-DD');
 
+const onEnter = () => {
+  const hash = window.location.hash.split('?');
+
+  if (hash[0] !== '#/en/departures/dr5reg/f25dvk/2016-09-30') {
+    window.location.hash = '#/en/departures/dr5reg/f25dvk/2016-09-30';
+  }
+};
+
 const routes = (
-    <Router history={createHistory()}>
-        <Route path="/" component={App}>
-          <Route path="coding-challenge-frontend-b" component={App}>
-            <IndexRedirect to={`/coding-challenge-frontend-b/en/departures/dr5reg/f25dvk/${date}`}/>
-            <Route path=":lang" component={Home}>
-                <Route path="departures(/:origin/:dest/:date)" component={Departures}/>
-            </Route>
-          </Route>
-          <Route path="*" component={NotFound}/>
-        </Route>
-    </Router>
+  <Router history={hashHistory}>
+    <Route path="/" component={App} onEnter={onEnter}>
+      <Route path=":lang" component={Home} onEnter={onEnter}>
+        <Route path="departures(/:origin/:dest/:date)" component={Departures} onEnter={onEnter}/>
+      </Route>
+      <Route path="*" onEnter={onEnter}/>
+    </Route>
+  </Router>
 )
 
 ReactDOM.render(routes, document.querySelector('#app'));
